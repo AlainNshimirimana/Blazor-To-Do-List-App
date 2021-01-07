@@ -1,5 +1,24 @@
-﻿<h3>Todo</h3>
+﻿@page "/todo"
+<h3>Todo</h3>
+<ul>
+   @foreach (var todo in todos)
+   {
+      <li>@todo.Title</li>
+   }
+</ul>
+
+<input placeholder="What todo..." @bind="newTodo"/>
+<button @onclick="AddTodo">Add todo</button>
 
 @code {
-
+    private string newTodo;
+    private IList<TodoItem> todos = new List<TodoItem>();
+    private void AddTodo()
+    {
+       if (!string.IsNullOrWhiteSpace(newTodo))   //if the input field is NOT empty or DOESN'T have whitespace
+       {
+          todos.Add(new TodoItem { Title = newTodo });  //Add the new todo to the TodoItem list
+          newTodo = string.Empty;  //After submitting the todo item, set the field to empty string.
+       }
+    }
 }
