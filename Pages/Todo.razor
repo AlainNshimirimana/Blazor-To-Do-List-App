@@ -1,9 +1,13 @@
 ﻿@page "/todo"
-<h3>Todo</h3>
+<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
+<!-- The line above will show the number of items that are not completed on the todo list -->
 <ul>
    @foreach (var todo in todos)
    {
-      <li>@todo.Title</li>
+      <li>
+         <input type="checkbox" @bind="todo.IsDone"/>
+         <input @bind="todo.Title"/>
+      </li>
    }
 </ul>
 
